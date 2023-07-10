@@ -1,0 +1,58 @@
+\documentclass{article}
+\usepackage{epigraph}
+\title{6.033 Lecture 9 \\ Networking II}
+\author{Americo De Filippo}
+\begin{document} 
+  \maketitle
+  \begin{thebibliography}{9}
+    \bibitem{texbook}
+    Saltzer, Jerome H. and M. Frans Kaashoek. Principles of Computer System Design: An Introduction (2009): \textbf{Section: 7.2}
+  \end{thebibliography}
+  Review of last time about best effort, which means that there are some proprety that 
+  won't be garateed.
+  \section{Layering}
+    As we have seen previusly a standard way of dealing with complexity is with modularity, 
+    and the modularity used into network system are layers and protocols (which is just 
+    a set of rules for make two device communicate in order to deal with complexity).
+    We are gonna see speficiation of this layer in the next lecture starting with the end-to-end
+    layer that will be in charge of the resolution of our best effort's problems.
+  \section{Encapsulation}
+    We are gonna achieve the layering via encapsulation layer by layer, inserting or 
+    removing his header/trailer for his information. Another important charateristic is the
+    independecy of each layer, every layer don't know anything about the others layers and in 
+    way we are gonna achieve completely indipendecy by the modules (strong modularity).
+  \section{Link Layer Issues}
+    The link layer needs to provide: manager bits transmission via Digital -> Analog -> Digital
+    conversion, it does framing which is basically how the software on the layer decide 
+    whether a new frame has began or ended. Another of them is Channel Access which is how
+    someone that want to send a message used the wire or the layer without intefering with 
+    another one which is transmetting \footnote{read paper on ethernet}. The last
+    thing that is done in this layer is error detection/correction, the idea is that 
+    when transmitting the message on a wire the message could be corrupted or there could be 
+    some problem with the transmission. 
+    \subsection{D to A to D coversion}
+      Suppose we have a sender that want to send some kind of binary bits flow, that could be 
+      rappresented by a quadratic curve, we decide when sending a new bits every clock signal.
+      But when the reciver reciev the data it will have not a perfect smooth signal and for
+      this reason we want to decode the original message. This will be done knowing the frequency
+      of the message \footnote{here we know that there are a lot arguments like shannon's etc...}
+      But what could happen is our clock signal could be with the same frequency but they are 
+      out of phase.
+      \paragraph{How to fix the out of phase problem} The solution is called PLL (phase lock loop)
+        so we basically need to know how much we need to shift our signal. A simple way of implementing
+        this is called \textbf{oversampling 8x}, with this tequinique what we should see if we are
+        perfetctly alligned in time the same number(8) of 0 or 1 for due original bits of the signal. 
+        And when this does not happen we are gonna to shift to the side of the one with less number
+        of continuosily 1 or 0 \footnote{see the slides (slides/L9.pdf) for more clarity}.
+      \paragraph{How to fix long sequence of the same bit} If I have a long sequence of the same
+        bit is that i cannot know how much should i shift my signal. The solution to this is called
+        Manchester Encoding: the idea is that we are trasmitting a zero for a transition to a low
+        to a high and a 1 from a high to low. In this way i wont have a flat signal. 
+    \subsection{Clock Sync and Manchester Encoding}
+      The issue that this enconding resolves is to have a sync clock, in order to read the 
+      meassage correcly. A clock is a message that alternates from 0 to 1. With the clock
+      signal we can know how many bits we have. This could not happen if we don't sync the
+      two clocks. The place where we miss some bit caused by the mismatch of the two clock
+      signal is called \textbf{Clock SI:P}. One way that we can sync the two clocks is via 
+      gps (antenna), with atomic clocks (which are really precise).
+  \end{document}

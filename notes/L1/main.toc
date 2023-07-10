@@ -1,0 +1,21 @@
+\contentsline {section}{\numberline {1}Introduction to Systems}{2}{}%
+\contentsline {subsection}{\numberline {1.1}Common problems of system in many fields}{2}{}%
+\contentsline {subsubsection}{\numberline {1.1.1}Emergent Properties}{2}{}%
+\contentsline {subsubsection}{\numberline {1.1.2}Propagation Effects}{2}{}%
+\contentsline {subsubsection}{\numberline {1.1.3}Incommensurate Scaling}{3}{}%
+\contentsline {subsubsection}{\numberline {1.1.4}Trade-offs}{3}{}%
+\contentsline {subsubsection}{\numberline {1.1.5}Systems, Components, interfaces, and environments}{3}{}%
+\contentsline {subsubsection}{\numberline {1.1.6}Complexity}{4}{}%
+\contentsline {subsection}{\numberline {1.2}The Source of Complexity}{5}{}%
+\contentsline {subsubsection}{\numberline {1.2.1}Cascading and interacting requirements}{5}{}%
+\contentsline {paragraph}{The other thing: Generality}{6}{}%
+\contentsline {subsubsection}{\numberline {1.2.2}Maintaining High utilization}{6}{}%
+\contentsline {subsection}{\numberline {1.3}Coping with complexity I}{7}{}%
+\contentsline {subsubsection}{\numberline {1.3.1}Modularity}{7}{}%
+\contentsline {subsubsection}{\numberline {1.3.2}Abstraction}{7}{}%
+\contentsline {subsubsection}{\numberline {1.3.3}Layering}{7}{}%
+\contentsline {subsubsection}{\numberline {1.3.4}Hierarchy}{8}{}%
+\contentsline {subsubsection}{\numberline {1.3.5}Putting all together: \textit {binding}}{8}{}%
+\contentsline {section}{\numberline {2}Enforcing modularity with client and services}{8}{}%
+\contentsline {subsection}{\numberline {2.1}From soft to strong modularity}{9}{}%
+\contentsline {subsection}{\numberline {2.2}The Client/Service organization}{9}{}%

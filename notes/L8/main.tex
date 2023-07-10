@@ -1,0 +1,61 @@
+\documentclass{article}
+\usepackage{epigraph}
+\title{6.033 Lecture 8 \\ Networking I}
+\author{Americo De Filippo}
+\begin{document} 
+  \maketitle
+  \begin{thebibliography}{9}
+    \bibitem{texbook}
+    Saltzer, Jerome H. and M. Frans Kaashoek. Principles of Computer System Design: An Introduction (2009): \textbf{Section: 7.1}
+\end{thebibliography}
+  A computer network is some kind of a connection that make some 
+  computers commiunicates between each others. They allow us among 
+  a lot of thing to access remote data, and separate client/server. 
+  In the end they are a complex and interesting computer system.
+  \section{Universal communication}
+    The goal is the universal communication between differents machine, 
+    the network system that we are gonna to describe is entailed into the
+    cloud that is between all the computers. 
+    \subsection{Interesing issues}
+      d(tech)/dt (physical medium, percetuge message get lost), there are also
+      some kind of limits that are just physical like the speed of light. Another
+      issue is that they are a shared infrastructure, they are multi user usage.
+    \subsection{tecnology}
+      They are heterogeneous $10^7$ difference, this means that there are a lot of 
+      differents protocols, or different performance systems like routers, smartphones 
+      network modules for computers etc...  \\ In general we want to define some kind of 
+      formula which is like $length/spdl + bits/secb$ The first term is called the bit rate
+      and the second term is the propagation delay.
+    \subsection{sharing}
+      \paragraph{Multiplexing or switching} This is a way of sharing nodes in order to access some kind 
+        other computer and is good for avoid to have all connected to everyone, which would
+        cause a awful amout of wires. The idea behind this is to have swiches a various 
+        location around the internet. In this way we are gonna have some kind of different 
+        destination but same data stuff. For this reason we are gonna introduce the notion
+        of \textbf{routing}.
+        \subsubsection{Routing} 
+          How to get to everybody location onto the network? This is decision made by the 
+          switch based on their own table (we are gonna see this futher in the future).
+        \subsection{circut switching}
+          The idea for this is that we want to setup some reserved channel between 2 end 
+          points. Of course we dont use this tecnology anymore, but the idea is in some way
+          preserved. Let's say we have some operators A, B, C that want to communicate on the
+          same wire. What our new tecnology does is something called TDM (time division 
+          multiplexing), exlusively divied traffic for some kind of evenly slices time.
+          Futhermore we have to know the number of intervals so that we can have some kind of
+          idea of the max number of data per second. If we want to know the capacity of the
+          circuit, we want to look at the max number of data that can traffic in one interval.
+          \paragraph{The problem with it} The real issue is the continue nature of the 
+            circuit switching, we do not know the rates of traffing on our network.
+        \subsection{packet switching}
+          Is simply not possible to know rate of traffic throght the network. The idea is
+          that every node can talk at any moment. The complexity is that we cannot predict
+          the data amout, but we have to know it cause we cannot exeed the network capacity.
+          For this reason we are gonna have some kind of queue, whe the queue overfill we have
+          some kind of \textbf{congestion}. If a queue overfill almost ever we have to reject
+          data or drop some.
+          \paragraph{Best effor networking} They dont garatee that the data will be delivered, 
+            but the system will the best that he can for having the data delivered. What we 
+            are gonna do in the next session is to look of how we are gonna create software  
+            in order to have the best effor principle work as hard as he can.
+\end{document}

@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{epigraph}
+\title{6.033 Lecture 10 \\ Networking II}
+\author{Americo De Filippo}
+\begin{document} 
+  \maketitle
+  \begin{thebibliography}{9}
+    \bibitem{texbook}
+    Saltzer, Jerome H. and M. Frans Kaashoek. Principles of Computer System Design: An Introduction (2009): \textbf{Section: 7.4}
+  \end{thebibliography}
+  Last time we talked about the three layers: ETE, network, link. We went about how this
+  interact with each other in a connection. Today we are gonna finish the discussion of 
+  the link layer, and then we are gonna go about the net layer.
+  \section{The others Issue of link layer: Framing}
+    When you are sending a frame (packet in the link layer) on the link layer the recevier
+    has to know whether the packet is starting or ending. The solution is pretty simple 
+    we are gonna to add simply some number at the start and another at the end of the 
+    message. 
+    \paragraph{what if the net-layer includes in his message the end code?} One solution
+      could be is to make the end symbol reserved only to the link layer. Another idea is 
+      called bit-stuffing, suppose we send our end code let's say 1111, the sender is gonna
+      convert 111 to 1110 and the recv will do the inverse. In this way we are gonna
+      ensure that when is encounter the 1111 signal we are sure that is the end symbol. 
+  \section{Network layer}
+    The network layer is based on the Ip protocol that has and Ipv4 Header \footnote{you could
+    review this online}. An important section of the header is the Time-to-live in order to 
+    waste time into loops in our network.
+    \subsection{Forwarding}
+      The idea is that given a packet what the next hop ought to be. They are gonna do that
+      by keeping a table, that will map the destination with the next link that he should use.
+      The routing is the one that is in charge of deciding with hop should choose in order to
+      have the shorter path. 
+    \subsection{Routing}
+      As we have said before here we are gonna choose the best path in order to have
+      the faster route for our packet to the destination. \\ The principles of the routing should be:
+      \begin{enumerate}
+        \item Scalable: We dont want people involved in configuring this millions 
+          of routers.
+        \item Robust: If a node fails the network should handle the fail without 
+          interrupting its execution.
+        \item Distributed: We want that every machine does something, we dont want a machine
+          that does all the job.
+      \end{enumerate}
+    \paragraph{Path Vector routing} The couting will be devided in 2 steps, Advertisement and 
+      the integration step. Of course when the advertisment that comes to a node has in it 
+      the node id, it will ignore the adv.
+    \paragraph{Error handling in path vector} Suppose that a link fail, for the 2 principle 
+      it wont stop, on the other hand it will just keep going expiring the node after he does
+      not hear adv from the failed node.
+    \paragraph{"Soft state"} You should relie on an information only when it is regulary
+      refreshed.
+  \subsection{The scalability is not achevied with path-vector}
+    The solution is: Hierarchy, throught sub-networks \footnote{read the recitation paper about
+    it}. For example if the MIT sub-network would go down it wont affect all the others 
+    sub-networks the internet. The idea is to have autonomous systems inside our enormous
+    network. To the edge of two regions there will be an edge-node that will interconnect them.
+\end{document}

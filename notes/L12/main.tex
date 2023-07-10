@@ -1,0 +1,50 @@
+\documentclass{article}
+\usepackage{epigraph}
+\title{6.033 Lecture 12 \\ Networking IV}
+\author{Americo De Filippo}
+\begin{document} 
+  \maketitle
+  \begin{thebibliography}{9}
+    \bibitem{texbook}
+    Saltzer, Jerome H. and M. Frans Kaashoek. Principles of Computer System Design: An Introduction (2009): \textbf{Section: 7.8}
+  \end{thebibliography}
+  Today we are going to end the networking section, and the last argument is the 
+  congestion control. The last time we talked about reliability, timers, sliding window and
+  flow control. All this concept are contained into the E2E layer.
+  \section{Sharing and Congestion Control}
+    Today we are gonna see how to achieve sharing of link and of course sharing the resources. 
+    So imagine you have a bunch of computer that share the network for communicating with
+    each other (you don't want a specific link for every computer). Imagine that the links
+    have 1000 Mbits/sec of bandwidth. Instead the pipe which is at the between of the net
+    have a bandwindth of 1 Mbits/sec (which we are gonna call the bottomneck link).
+    \subsection{Cross-layer}
+      \underline{Plan}: Sender i sends message at rate $r_i$ [bits/sec] \\ If they are sending
+      Too fast there must be some way to make the sender to slow down, otherwise if he is 
+      sending too slow there must be a way of telling him to send faster.
+      \paragraph{Buffering} At any point in time you could have multiple packet arrving to
+        a point, but he can handle just one of them. So in order to not drop the packet we
+        use buffers. Now the question is: \textbf{How much?} How much should my buffer be 
+        sized? We cannot have too small size cause it will end up dropping a lot of packets, 
+        on the other hand he cannot be too big cause he will slow down the link. That could 
+        cause \underline{congestion collapse}
+        \subsubsection{Congestion Collapse}
+          You could end up with a really big queue. The E2E sender is trying to decise if the
+          packet has been dropped or is still in the queue. But when the time will go up 
+          he will resend, in this case you will have multiple copy of the packet in the same
+          queue. Causing congestion collapse.
+          \subsection{The Law $\sum_{i=1}^{N} L_i < C$}
+            If this is achieved we are gonna have: \\ 1. No congestion collapse \\ 2. Reasonable
+            utiliz'n (efficiency) \\ 3. Equitable allocation.
+            \paragraph{Small infraction of this Law} We will handle the infraction of this law
+              if the RTTs are less then 100 RTTs with buffering, without bothering telling the
+              sender to slow down. Otherwise if it will be more than 100RTTs we will send a 
+              feedback to the sender and it will change the sending speed. One way of sending
+              feedback to the sender is by dropping packets aways (sign of congestion miss of 
+              ACK for that packet), therefore it will make the Cong. Window /= 2.
+    \subsection{How to start a communication? Slow Start}
+      The congestion window is handle in the following way: On each ACK you will increase 
+      the window size for $2^n$ with n is the number of ACK which is an exponential increase.
+      After a while it will automatically decise (based on some fraction of the number where
+      last congestion happened) to increase the window linearly, then perhaps some congestion 
+      happen and the we will half the congestion window size.
+\end{document}
